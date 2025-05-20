@@ -10,14 +10,14 @@ const PremiumUser = ()=> {
         });
         console.log(order);
 
-        const {amount, currency, id, status, notes, keyId } = order.data;
+        const {amount, currency, orderId, status, notes, keyId } = order.data;
         const options = {
         key: keyId, // Replace with your Razorpay key_id
         amount,
         currency,
         name: 'Bholaram devtinder',
         description: 'Test the razorpay',
-        order_id: id,
+        order_id: orderId,
         prefill: {
           firstName: notes.firstName,
           lastName: notes.lastName,
