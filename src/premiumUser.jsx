@@ -3,6 +3,17 @@ import * as React from 'react';
 import { BASEURL } from './constant';
 
 const PremiumUser = ()=> {
+const [isPremiumUser, setIsPremumUser] = React.useState(false)
+
+
+    const verifyUser = async (res={})=> {
+        console.log('razorpay res', res);
+
+        const user = await axios.get(BASEURL+'/premium/verify', {
+            withCredentials: true
+        })
+        setIsPremumUser(user.data.isPremium)
+    }
     const premiumClickHandler =async  ()=> {
     try{
         const order = await axios.post(`${BASEURL}/payment/create`, {type:"gold"}, {
@@ -26,6 +37,7 @@ const PremiumUser = ()=> {
         theme: {
           color: '#F37254'
         },
+        handler: verifyUser
       };
         const rzp = new Razorpay(options);
         rzp.open();
@@ -37,7 +49,10 @@ const PremiumUser = ()=> {
 
     return (
     <>
-    <button style={{backgroundColor:"green", padding:"4px", margin:"4px"}}onClick={premiumClickHandler}>Pay Now to become Premium user</button>
+    {isPremiumUser ? <h2>you are already premium user</h2> : 
+    <button style={{backgroundColor:"green", padding:"4px", margin:"4px"}}
+    onClick={premiumClickHandler}>Pay Now to become Premium user</button>
+    }
     </>
     )
 }
