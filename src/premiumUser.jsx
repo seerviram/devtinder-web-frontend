@@ -14,6 +14,10 @@ const [isPremiumUser, setIsPremumUser] = React.useState(false)
         })
         setIsPremumUser(user.data.isPremium)
     }
+
+    React.useEffect(()=> {
+       verifyUser()
+    },[])
     const premiumClickHandler =async  ()=> {
     try{
         const order = await axios.post(`${BASEURL}/payment/create`, {type:"gold"}, {
