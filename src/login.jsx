@@ -11,14 +11,15 @@ const Login = ()=> {
          const data = await axios.post(`${BASEURL}/login`, {
             emailId: emailId,
             password: password
-         })
+         }, {
+            withCredentials: true
+         }
+        )
          console.log('login successfully', data)
-  
-      }catch(e){
+      } catch(e) {
         console.log('error occured',e)
       }
   }
-
     return(
         <div>
             <label> email</label>
